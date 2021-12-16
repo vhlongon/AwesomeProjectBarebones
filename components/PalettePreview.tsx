@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { Color, RootStackParamList } from '../types';
-import styled from 'styled-components/native';
 import { FlatList } from 'react-native-gesture-handler';
+import styled from 'styled-components/native';
+import { Color, Palette } from '../types';
 
 const Container = styled(View)`
   margin: 10px;
@@ -24,26 +23,19 @@ const ColorBox = styled.View<{ color: Color }>`
 `;
 
 interface Props {
-  navigation: NativeStackScreenProps<RootStackParamList, 'Home'>['navigation'];
-  colors: Color[];
-  colorName: string;
+  onPress: () => void;
+  palette: Palette;
 }
 
-const NavigationItem = ({ navigation, colors, colorName }: Props) => {
-  const firstFive = colors?.slice(0, 5);
+const PalettePreview = ({ onPress, palette }: Props) => {
+  const firstFive = palette.colors?.slice(0, 5);
 
   return (
     <Container>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('ColorPalette', {
-            name: colorName,
-            colors,
-          });
-        }}>
-        <Title>{colorName}</Title>
+      <TouchableOpacity onPress={onPress}>
+        <Title>{palette.name}</Title>
         <FlatList
-          key={`samples-${colorName}`}
+          key={`samples-${palette.name}`}
           data={firstFive}
           horizontal
           keyExtractor={item => item.name}
@@ -54,4 +46,4 @@ const NavigationItem = ({ navigation, colors, colorName }: Props) => {
   );
 };
 
-export default NavigationItem;
+export default PalettePreview;

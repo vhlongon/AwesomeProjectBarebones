@@ -6,39 +6,43 @@ import {
   Color,
   RainbowColors,
   FrontendMastersColors,
+  Palette,
 } from '../types';
-import NavigationItem from '../components/NavigationItem';
+import PalettePreview from '../components/PalettePreview';
 import BaseScreen from './BaseScreen';
+import { FlatList } from 'react-native';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
-const getColorsFromEnum = (colors: Record<string, string>): Color[] =>
+const getColorsFor = (colors: Record<string, string>): Color[] =>
   Object.entries(colors).map(([key, value]) => ({
     value: value,
     name: key,
   }));
 
+const allColors: Palette[] = [
+  { name: 'Solarized', colors: getColorsFor(SolarizedColors) },
+  { name: 'Rainbow', colors: getColorsFor(RainbowColors) },
+  {
+    name: 'Frontend Masters',
+    colors: getColorsFor(FrontendMastersColors),
+  },
+];
+
 const Home = ({ navigation }: Props) => {
-  const solarized = getColorsFromEnum(SolarizedColors);
-  const rainbow = getColorsFromEnum(RainbowColors);
-  const frontendMasters = getColorsFromEnum(FrontendMastersColors);
+  const handlePress = (palette: Palette) => () => {
+    navigation.navigate('ColorPalette', palette);
+  };
 
   return (
     <BaseScreen>
-      <NavigationItem
-        navigation={navigation}
-        colorName="Solarized"
-        colors={solarized}
-      />
-      <NavigationItem
-        navigation={navigation}
-        colorName="Rainbow"
-        colors={rainbow}
-      />
-      <NavigationItem
-        navigation={navigation}
-        colorName="Frontend Masters"
-        colors={frontendMasters}
+      <FlatList
+        key={'colors-previews'}
+        data={allColors}
+        keyExtractor={item => item.name}
+        renderItem={({ item }) => (
+          <PalettePreview onPress={handlePress(item)} palette={item} />
+        )}
       />
     </BaseScreen>
   );

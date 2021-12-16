@@ -42,3 +42,8 @@ export type Color = {
   name: string;
   value: string;
 };
+
+export type Palette = {
+  name: string;
+  colors: Color[];
+};
