@@ -9,17 +9,10 @@
  */
 
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
-
+import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import styled from 'styled-components/native';
 import ColorBox from './components/ColorBox';
-
-enum Color {
-  'Cyan' = '#2aa198',
-  'Blue' = '#268bd2',
-  'Magenta' = '#d33682',
-  'Orange' = '#cb4b16',
-}
+import { Color } from './types';
 
 const Container = styled(View)`
   margin: 10px;
@@ -32,15 +25,19 @@ const Title = styled(Text)`
 `;
 
 const App = () => {
-  console.warn(Color.Cyan);
+  const colors = Object.values(Color).map(color => color);
+  const numColumns = 1;
   return (
     <SafeAreaView>
       <Container>
         <Title>Here are some boxes of different colors</Title>
-        <ColorBox color={Color.Cyan} />
-        <ColorBox color={Color.Blue} />
-        <ColorBox color={Color.Magenta} />
-        <ColorBox color={Color.Orange} />
+        <FlatList
+          key={`flatlist-col-${numColumns}`}
+          numColumns={numColumns}
+          data={colors}
+          keyExtractor={item => item}
+          renderItem={({ item }) => <ColorBox color={item} />}
+        />
       </Container>
     </SafeAreaView>
   );
