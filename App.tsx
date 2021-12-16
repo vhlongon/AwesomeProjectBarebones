@@ -25,7 +25,9 @@ const Container = styled(View)`
 `;
 
 const Title = styled(Text)`
+  color: black;
   font-weight: bold;
+  margin-bottom: 10px;
 `;
 
 const Item = styled(View)<{color: Color}>`
