@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 import { Color } from '../types';
 import tinycolor from 'tinycolor2';
 
-const Item = styled(View)<{ color: Color }>`
+const Item = styled(View)<{ color: string }>`
   background: ${({ color }) => color};
   padding: 10px;
   margin-vertical: 5px;
@@ -15,7 +15,7 @@ const Item = styled(View)<{ color: Color }>`
   justify-content: center;
 `;
 
-const ItemText = styled(Text)<{ color: Color }>`
+const ItemText = styled(Text)<{ color: string }>`
   color: ${({ color }) => (tinycolor(color).isDark() ? 'white' : 'black')};
   justify-content: center;
   text-align: center;
@@ -27,13 +27,12 @@ interface Props {
 }
 
 const ColorBox = ({ color }: Props) => {
-  const [colorName, colorValue] =
-    Object.entries(Color).find(([, value]) => value === color) || [];
+  const { name, value } = color;
 
   return (
-    <Item color={color}>
-      <ItemText color={color}>
-        {colorName} - {colorValue}
+    <Item color={value}>
+      <ItemText color={value}>
+        {name} - {value}
       </ItemText>
     </Item>
   );

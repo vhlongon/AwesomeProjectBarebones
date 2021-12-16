@@ -1,4 +1,9 @@
-export enum Color {
+export type RootStackParamList = {
+  Home: undefined;
+  ColorPalette?: { colors: Color[]; name: string };
+};
+
+export enum SolarizedColors {
   'Base03' = '#002b36',
   'Base02' = '#073642',
   'Base01' = '#586e75',
@@ -16,3 +21,24 @@ export enum Color {
   'Cyan' = '#2aa198',
   'Green' = '#859900',
 }
+
+export enum RainbowColors {
+  'Red' = '#FF0000',
+  'Orange' = '#FF7F00',
+  'Yellow' = '#FFFF00',
+  'Green' = '#00FF00',
+  'Violet' = '#8B00FF',
+}
+
+export enum FrontendMastersColors {
+  'Red' = '#c02d28',
+  'Black' = '#3e3e3e',
+  'Grey' = '#8a8a8a',
+  'White' = '#ffffff',
+  'Orange' = '#e66225',
+}
+
+export type Color = {
+  name: string;
+  value: string;
+};

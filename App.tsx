@@ -1,45 +1,26 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
-import { FlatList, SafeAreaView, Text, View } from 'react-native';
-import styled from 'styled-components/native';
-import ColorBox from './components/ColorBox';
-import { Color } from './types';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from './screens/Home';
+import ColorPalette from './screens/ColorPalette';
+import { RootStackParamList } from './types';
 
-const Container = styled(View)`
-  margin: 10px;
-`;
-
-const Title = styled(Text)`
-  color: black;
-  font-weight: bold;
-  margin-bottom: 10px;
-`;
+const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
-  const colors = Object.values(Color).map(color => color);
-  const numColumns = 1;
   return (
-    <SafeAreaView>
-      <Container>
-        <Title>Here are some boxes of different colors</Title>
-        <FlatList
-          key={`flatlist-col-${numColumns}`}
-          numColumns={numColumns}
-          data={colors}
-          keyExtractor={item => item}
-          renderItem={({ item }) => <ColorBox color={item} />}
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen component={Home} name="Home" />
+        <Stack.Screen
+          component={ColorPalette}
+          name="ColorPalette"
+          options={({ route }) => ({
+            title: `Color scheme - ${route.params?.name}`,
+          })}
         />
-      </Container>
-    </SafeAreaView>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
