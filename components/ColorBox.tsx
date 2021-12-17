@@ -3,16 +3,18 @@ import { Text, View } from 'react-native';
 import styled from 'styled-components/native';
 import { Color } from '../types';
 import tinycolor from 'tinycolor2';
+import { boxShadow } from './styles';
 
 const Item = styled(View)<{ color: string }>`
   background: ${({ color }) => color};
   padding: 10px;
-  margin-vertical: 5px;
+  margin-vertical: 7.5px;
   border-radius: 2.5px;
   flex-grow: 1;
   flex-shrink: 1;
   align-items: center;
   justify-content: center;
+  ${boxShadow(4)};
 `;
 
 const ItemText = styled(Text)<{ color: string }>`

@@ -5,6 +5,7 @@ import styled from 'styled-components/native';
 const Container = styled(View)`
   flex: 1;
   background: white;
+  padding: 10px;
 `;
 
 const BaseScreen: React.FC<{}> = ({ children }) => {
