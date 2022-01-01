@@ -3,8 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
+
 target 'AwesomeProjectBarebones' do
   config = use_native_modules!
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -12,7 +16,6 @@ target 'AwesomeProjectBarebones' do
     :hermes_enabled => false
   )
 
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'AwesomeProjectBarebonesTests' do
     inherit! :complete
