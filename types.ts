@@ -1,6 +1,12 @@
 export type RootStackParamList = {
   Home: undefined;
   ColorPalette?: { colors: Color[]; name: string };
+  TabNavigation: undefined;
+};
+
+export type RootTabParamList = {
+  TabHome: undefined;
+  About?: { details: { name: string } & Record<string, string | number> };
 };
 
 export enum SolarizedColors {

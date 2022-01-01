@@ -10,7 +10,7 @@ import {
 } from '../types';
 import PalettePreview from '../components/PalettePreview';
 import BaseScreen from './BaseScreen';
-import { FlatList } from 'react-native';
+import { Button, FlatList } from 'react-native';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -43,6 +43,10 @@ const Home = ({ navigation }: Props) => {
         renderItem={({ item }) => (
           <PalettePreview onPress={handlePress(item)} palette={item} />
         )}
+      />
+      <Button
+        title="Go to Tab navigation"
+        onPress={() => navigation.navigate('TabNavigation')}
       />
     </BaseScreen>
   );
