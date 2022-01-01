@@ -13,7 +13,7 @@ const TabNavigation = () => (
       name="TabHome"
       component={TabHome}
       options={{
-        title: 'Tabs home',
+        headerShown: false,
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons name="home" color={color} size={32} />
         ),

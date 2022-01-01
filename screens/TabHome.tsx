@@ -28,7 +28,7 @@ const TabHome = () => {
     <BaseScreen>
       <SafeAreaView>
         <Container>
-          <Title>TabHome</Title>
+          <Title>Choose one:</Title>
           <SolidButton>
             <Button
               color="#fff"

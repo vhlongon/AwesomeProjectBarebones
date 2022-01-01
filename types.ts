@@ -1,4 +1,9 @@
 export type RootStackParamList = {
+  MainStack: undefined;
+  Modal?: undefined;
+};
+
+export type MainStackParamList = {
   Home: undefined;
   ColorPalette?: { colors: Color[]; name: string };
   TabNavigation: undefined;

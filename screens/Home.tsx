@@ -1,6 +1,5 @@
 import React from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, Palette } from '../types';
+import { MainStackParamList, Palette, RootStackParamList } from '../types';
 import PalettePreview from '../components/PalettePreview';
 import BaseScreen from './BaseScreen';
 import { Button, FlatList, Text, View } from 'react-native';
@@ -8,8 +7,13 @@ import { useGetPalettes } from '../hooks/useGetPalettes';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { CompositeScreenProps } from '@react-navigation/native';
+import { StackScreenProps } from '@react-navigation/stack';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = CompositeScreenProps<
+  StackScreenProps<MainStackParamList, 'Home'>,
+  StackScreenProps<RootStackParamList, 'Modal'>
+>;
 
 const ErrorText = styled(Text)`
   background-color: red;
@@ -37,9 +41,9 @@ const Home = ({ navigation }: Props) => {
     navigation.navigate('ColorPalette', palette);
   };
 
-  const { data, error, status } = useGetPalettes();
+  const { data, error, isLoading, refetch } = useGetPalettes();
 
-  if (status === 'loading') {
+  if (isLoading) {
     return (
       <Container>
         <Text>Loading...</Text>
@@ -60,6 +64,10 @@ const Home = ({ navigation }: Props) => {
 
   return (
     <BaseScreen>
+      <Button
+        title="Go to Tab navigation"
+        onPress={() => navigation.navigate('Modal')}
+      />
       <FlatList
         key={'colors-previews'}
         data={data}
@@ -67,6 +75,8 @@ const Home = ({ navigation }: Props) => {
         renderItem={({ item }) => (
           <PalettePreview onPress={handlePress(item)} palette={item} />
         )}
+        refreshing={isLoading}
+        onRefresh={() => refetch()}
       />
       <Button
         title="Go to Tab navigation"

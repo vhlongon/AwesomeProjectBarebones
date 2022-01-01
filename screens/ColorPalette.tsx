@@ -3,7 +3,7 @@ import { FlatList, SafeAreaView, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
 import ColorBox from '../components/ColorBox';
-import { RootStackParamList } from '../types';
+import { MainStackParamList } from '../types';
 import BaseScreen from './BaseScreen';
 
 const Container = styled(View)`
@@ -16,7 +16,7 @@ const Title = styled(Text)`
   margin-bottom: 10px;
 `;
 
-type Props = NativeStackScreenProps<RootStackParamList, 'ColorPalette'>;
+type Props = NativeStackScreenProps<MainStackParamList, 'ColorPalette'>;
 
 const ColorPalette = ({ route }: Props) => {
   const numColumns = 1;
