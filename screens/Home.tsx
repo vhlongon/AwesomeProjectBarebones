@@ -2,13 +2,14 @@ import React from 'react';
 import { MainStackParamList, Palette, RootStackParamList } from '../types';
 import PalettePreview from '../components/PalettePreview';
 import BaseScreen from './BaseScreen';
-import { Button, FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 import { useGetPalettes } from '../hooks/useGetPalettes';
 import * as Animatable from 'react-native-animatable';
 import styled from 'styled-components/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { CompositeScreenProps } from '@react-navigation/native';
 import { StackScreenProps } from '@react-navigation/stack';
+import SolidButton from '../components/SolidButton';
 
 type Props = CompositeScreenProps<
   StackScreenProps<MainStackParamList, 'Home'>,
@@ -36,7 +37,13 @@ const Container = styled(View)`
   justify-content: center;
 `;
 
-const Home = ({ navigation }: Props) => {
+const Home = ({ navigation, route }: Props) => {
+  const newColorPalette = route.params && {
+    colors: route.params.colors,
+    name: route.params.name,
+    id: route.params.id,
+  };
+
   const handlePress = (palette: Palette) => () => {
     navigation.navigate('ColorPalette', palette);
   };
@@ -62,15 +69,18 @@ const Home = ({ navigation }: Props) => {
     );
   }
 
+  const palettes = data || [];
+
   return (
     <BaseScreen>
-      <Button
-        title="Go to Tab navigation"
+      <SolidButton
+        bgColor="orchid"
+        title="Add new palette"
         onPress={() => navigation.navigate('Modal')}
       />
       <FlatList
         key={'colors-previews'}
-        data={data}
+        data={newColorPalette ? [newColorPalette, ...palettes] : palettes}
         keyExtractor={item => `item-${item.id}`}
         renderItem={({ item }) => (
           <PalettePreview onPress={handlePress(item)} palette={item} />
@@ -78,8 +88,9 @@ const Home = ({ navigation }: Props) => {
         refreshing={isLoading}
         onRefresh={() => refetch()}
       />
-      <Button
+      <SolidButton
         title="Go to Tab navigation"
+        bgColor="orchid"
         onPress={() => navigation.navigate('TabNavigation')}
       />
     </BaseScreen>

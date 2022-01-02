@@ -1,11 +1,17 @@
+export type Palette = {
+  id: number | string;
+  name: string;
+  colors: Color[];
+};
+
 export type RootStackParamList = {
   MainStack: undefined;
   Modal?: undefined;
 };
 
 export type MainStackParamList = {
-  Home: undefined;
-  ColorPalette?: { colors: Color[]; name: string };
+  Home?: Palette;
+  ColorPalette?: Palette;
   TabNavigation: undefined;
 };
 
@@ -17,10 +23,4 @@ export type RootTabParamList = {
 export type Color = {
   name: string;
   value: string;
-};
-
-export type Palette = {
-  id: number;
-  name: string;
-  colors: Color[];
 };

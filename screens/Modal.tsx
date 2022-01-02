@@ -1,24 +1,19 @@
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, View } from 'react-native';
 import styled from 'styled-components/native';
-import { RootStackParamList } from '../types';
 import BaseScreen from './BaseScreen';
+import AddPaletteForm from '../components/AddPaletteForm';
 
 const Container = styled(View)`
   margin: 10px;
 `;
 
-type Props = BottomTabScreenProps<RootStackParamList, 'Modal'>;
-
-const Modal = (props: Props) => {
-  console.log('Modal props:', props);
-
+const Modal = () => {
   return (
     <BaseScreen>
       <SafeAreaView>
         <Container>
-          <Text>Modal</Text>
+          <AddPaletteForm />
         </Container>
       </SafeAreaView>
     </BaseScreen>

@@ -1,8 +1,9 @@
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Button, SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import styled from 'styled-components/native';
+import SolidButton from '../components/SolidButton';
 import { RootTabParamList } from '../types';
 import BaseScreen from './BaseScreen';
 
@@ -16,11 +17,6 @@ const Title = styled(Text)`
   margin-bottom: 10px;
 `;
 
-const SolidButton = styled(View)`
-  background-color: #007aff;
-  margin-vertical: 10px;
-`;
-
 const TabHome = () => {
   const navigation = useNavigation<BottomTabNavigationProp<RootTabParamList>>();
 
@@ -29,28 +25,22 @@ const TabHome = () => {
       <SafeAreaView>
         <Container>
           <Title>Choose one:</Title>
-          <SolidButton>
-            <Button
-              color="#fff"
-              onPress={() => {
-                navigation.jumpTo('About', {
-                  details: { name: 'John Rambo', age: 42 },
-                });
-              }}
-              title="Click to view Rambo details"
-            />
-          </SolidButton>
-          <SolidButton>
-            <Button
-              color="#fff"
-              onPress={() => {
-                navigation.jumpTo('About', {
-                  details: { name: 'Thor Odensson', age: 4000 },
-                });
-              }}
-              title="Click to view Thors details"
-            />
-          </SolidButton>
+          <SolidButton
+            onPress={() => {
+              navigation.jumpTo('About', {
+                details: { name: 'John Rambo', age: 42 },
+              });
+            }}
+            title="Click to view Rambo details"
+          />
+          <SolidButton
+            onPress={() => {
+              navigation.jumpTo('About', {
+                details: { name: 'Thor Odensson', age: 4000 },
+              });
+            }}
+            title="Click to view Thors details"
+          />
         </Container>
       </SafeAreaView>
     </BaseScreen>

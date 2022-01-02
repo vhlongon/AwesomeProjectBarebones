@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, FlatListProps } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import styled from 'styled-components/native';
 import { Color, Palette } from '../types';
-import { boxShadow } from './styles';
+import ColorSwatch from './ColorSwatch';
 
 const Container = styled(View)`
   margin-horizontal: 10px;
@@ -20,16 +20,6 @@ const List = styled(FlatList)<ColorsListProps>`
   padding-vertical: 5px;
   margin-bottom: 10px;
   flex-direction: row;
-`;
-
-const ColorSwatch = styled.View<{ color: Color }>`
-  width: 50px;
-  height: 50px;
-  background-color: ${({ color }) => color.value};
-  margin-right: 10px;
-  margin-bottom: 10px;
-  border-radius: 2.5px;
-  ${boxShadow(4)};
 `;
 
 interface Props {
